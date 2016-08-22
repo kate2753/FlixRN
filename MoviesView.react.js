@@ -4,6 +4,7 @@ import {
   ListView,
 } from 'react-native';
 import MovieCellView from './MovieCellView.react';
+import { fetchMovies } from './api';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,8 +35,11 @@ class MoviesView extends React.Component {
     );
   }
   componentDidMount() {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([{title: 'Movie 1'}, {title:'Movie 2'}]),
+    fetchMovies().then(movies => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(movies),
+        loading: false,
+      });
     });
   }
   render() {
