@@ -1,12 +1,11 @@
-import React, {
-  PropTypes,
-} from 'react';
+import React from 'react';
 import {
   View,
   Text,
   Image,
   StyleSheet,
 } from 'react-native';
+import MovieShape from '../shapes/MovieShape';
 const imageURIPrefix = 'https://image.tmdb.org/t/p/w500/'
 const getPosterURI = movie => `${imageURIPrefix}/${movie.poster_path}`
 
@@ -61,11 +60,7 @@ class MovieCellView extends React.Component {
 }
 
 MovieCellView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    overview: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-  }).isRequired,
+  movie: MovieShape.isRequired,
 };
 
 export default MovieCellView;

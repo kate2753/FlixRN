@@ -1,6 +1,6 @@
 import {
   AppRegistry,
 } from 'react-native';
-import App from './App.react'
+import NavApp from './react/components/NavApp.react'
 
-AppRegistry.registerComponent('FlixRN', () => App);
+AppRegistry.registerComponent('FlixRN', () => NavApp);

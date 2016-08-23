@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {
+  PropTypes,
+} from 'react';
 import {
   StyleSheet,
   ListView,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import MovieCellView from './MovieCellView.react';
-import { fetchMovies } from './api';
+import { fetchMovies } from '../api/MovieDBClient';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,10 +30,20 @@ class MoviesView extends React.Component {
     }
 
     this.renderRow = this.renderRow.bind(this);
+    this.onRowPress = this.onRowPress.bind(this);
+  }
+  onRowPress(movie) {
+    const { navigator } = this.props;
+    navigator.push({
+      title: movie.title,
+      movie: movie,
+    })
   }
   renderRow(movie) {
     return (
-      <MovieCellView movie={movie} />
+      <TouchableOpacity onPress={() => { this.onRowPress(movie) }}>
+        <MovieCellView movie={movie} />
+      </TouchableOpacity>
     );
   }
   componentDidMount() {
@@ -81,5 +94,9 @@ class MoviesView extends React.Component {
     );
   }
 }
+
+MoviesView.propTypes = {
+  navigator: PropTypes.object.isRequired,
+};
 
 export default MoviesView;
