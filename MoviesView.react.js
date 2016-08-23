@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   ListView,
+  Text,
 } from 'react-native';
 import MovieCellView from './MovieCellView.react';
 import { fetchMovies } from './api';
@@ -27,22 +28,50 @@ class MoviesView extends React.Component {
 
     this.renderRow = this.renderRow.bind(this);
   }
-  renderRow(rowData) {
+  renderRow(movie) {
     return (
-      <MovieCellView
-        title={rowData.title}
-      />
+      <MovieCellView movie={movie} />
     );
   }
   componentDidMount() {
-    fetchMovies().then(movies => {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(movies),
-        loading: false,
+    fetchMovies()
+      .then(movies => {
+        if (movies) {
+          this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(movies),
+            loading: false,
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          loading: false,
+          error: error.message,
+        });
       });
-    });
   }
   render() {
+    let {
+      loading,
+      error,
+    } = this.state;
+
+    if (loading) {
+      return (
+        <Text style={styles.container}>
+          Loading ...
+        </Text>
+      );
+    }
+
+    if (error) {
+      return (
+        <Text style={styles.container}>
+          {error}
+        </Text>
+      );
+    }
+
     return (
       <ListView
         style={styles.container}
