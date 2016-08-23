@@ -12,10 +12,14 @@ const getPosterURI = movie => `${imageURIPrefix}/${movie.poster_path}`
 const styles = StyleSheet.create({
   rowConainer: {
     flexDirection: 'row',
+    marginTop: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
   },
   textContainer: {
-    padding: 10,
     flex: 1,
+    justifyContent: 'flex-start',
   },
   text: {
     fontSize: 12,
@@ -23,6 +27,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+    marginTop: 8,
   },
   posterImage: {
     height: 100,
@@ -49,7 +54,7 @@ class MovieCellView extends React.Component {
           </Text>
           <Text
             style={styles.text}
-            numberOfLines={4}
+            numberOfLines={5}
           >
             {movie.overview}
           </Text>

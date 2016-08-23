@@ -12,7 +12,6 @@ import { fetchMovies } from '../api/MovieDBClient';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
   }
 });
 
