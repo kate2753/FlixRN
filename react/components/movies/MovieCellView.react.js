@@ -5,6 +5,8 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import MovieRating from '../shared/MovieRating.react';
+
 import MovieShape from '../../shapes/MovieShape';
 const imageURIPrefix = 'https://image.tmdb.org/t/p/w500/'
 const getPosterURI = movie => `${imageURIPrefix}/${movie.poster_path}`
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
     justifyContent: 'flex-start',
-    marginLeft: 10,
+    marginLeft: 10 ,
   },
   text: {
     fontSize: 12,
@@ -29,9 +31,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: '#DDD',
   },
+  rating: {
+    marginLeft: 8,
+  },
+  movieInfo: {
+    marginBottom: 8,
+    flexDirection: 'row',
+  },
   posterImage: {
-    height: 100,
-    width: 100,
+    width: 65,
   }
 });
 
@@ -52,9 +60,15 @@ class MovieCellView extends React.Component {
           >
             {movie.title}
           </Text>
+          <View style={styles.movieInfo}>
+            <Text style={styles.text}>{movie.release_date.getFullYear()}</Text>
+            <View style={styles.rating}>
+              <MovieRating movie={movie} />
+            </View>
+          </View>
           <Text
             style={styles.text}
-            numberOfLines={5}
+            numberOfLines={3}
           >
             {movie.overview}
           </Text>

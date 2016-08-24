@@ -5,7 +5,17 @@ const NOW_PLAYING_URL = `${URL_PREFIX}/now_playing?api_key=${API_KEY}`;
 function fetchMovies() {
   return fetch(NOW_PLAYING_URL)
     .then(response => response.json())
-    .then(response => response.results);
+    .then(response => mapMovieResults(response.results));
+}
+
+function mapMovieResults(movies) {
+  if (! movies) {
+    return movies;
+  }
+  return movies.map((movie) => {
+    movie.release_date = new Date(movie.release_date);
+    return movie;
+  });
 }
 
 export {
