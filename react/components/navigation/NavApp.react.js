@@ -13,8 +13,8 @@ import MovieView from '../movie_details/MovieView.react'
 const styles = StyleSheet.create({
   navBar: {
     borderBottomWidth: 1,
-    backgroundColor: 'white',
-    borderBottomColor: '#CCC',
+    backgroundColor: '#333',
+    borderBottomColor: '#000',
     flexDirection: 'row',
   },
   navBarItem: {
@@ -22,25 +22,24 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   navBarText: {
-    color: 'green',
+    fontWeight: 'bold',
+    color: '#DDD',
     marginLeft: 10,
   },
   navBarTitleText: {
-    fontWeight: 'bold',
-    color: '#333',
     marginLeft: 0,
   },
   contentContainer: {
     flex: 1,
     marginTop: 60,
-    backgroundColor: 'green',
+    backgroundColor: '#222',
     overflow: 'visible'
   }
 });
 
 const MOVIES_VIEW_ROUTE = {
   id: 'movies_view',
-  title: 'Flix',
+  title: 'Now Playing',
 };
 const routeMapper = {
   // eslint-disable-next-line react/display-name

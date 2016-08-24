@@ -12,22 +12,22 @@ const getPosterURI = movie => `${imageURIPrefix}/${movie.poster_path}`
 const styles = StyleSheet.create({
   rowConainer: {
     flexDirection: 'row',
-    marginTop: 10,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: 'white',
+    margin: 10,
   },
   textContainer: {
     flex: 1,
     justifyContent: 'flex-start',
+    marginLeft: 10,
   },
   text: {
     fontSize: 12,
+    color: '#999',
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 8,
+    marginBottom: 8,
+    color: '#DDD',
   },
   posterImage: {
     height: 100,

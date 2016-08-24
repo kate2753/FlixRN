@@ -13,6 +13,8 @@ import { fetchMovies } from '../../api/MovieDBClient';
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 10,
+    overflow: 'visible',
   }
 });
 
