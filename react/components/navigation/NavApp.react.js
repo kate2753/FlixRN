@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  BackAndroid,
 } from 'react-native';
 import MoviesView from '../movies/MoviesView.react';
 import MovieView from '../movie_details/MovieView.react'
@@ -42,6 +43,7 @@ const MOVIES_VIEW_ROUTE = {
   title: 'Flix',
 };
 const routeMapper = {
+  // eslint-disable-next-line react/display-name
   LeftButton: (route, navigator) => {
     if (navigator.getCurrentRoutes().length > 1) {
       return (
@@ -52,6 +54,7 @@ const routeMapper = {
     }
   },
   RightButton: () => null,
+  // eslint-disable-next-line react/display-name
   Title: route => (
     <View style={styles.navBarItem}>
       <Text style={[styles.navBarText, styles.navBarTitleText]}>{route.title}</Text>
@@ -63,9 +66,12 @@ class NavApp extends React.Component {
   constructor(props) {
     super(props);
 
+    this.navigator = null;
     this.renderScene = this.renderScene.bind(this);
+    this.handleBackButtonAndroid = this.handleBackButtonAndroid.bind(this);
   }
   renderScene(route, navigator) {
+    this.navigator = navigator;
     if (route.id === MOVIES_VIEW_ROUTE.id) {
       return (
         <View style={styles.contentContainer}>
@@ -81,6 +87,19 @@ class NavApp extends React.Component {
         />
       </View>
     );
+  }
+  handleBackButtonAndroid() {
+    if (this.navigator && this.navigator.getCurrentRoutes().length > 1) {
+      this.navigator.pop();
+      return true;
+    }
+    return false;
+  }
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this.handleBackButtonAndroid);
+  }
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButtonAndroid);
   }
   render() {
     return (
