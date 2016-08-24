@@ -6,10 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import MovieRating from '../shared/MovieRating.react';
-
 import MovieShape from '../../shapes/MovieShape';
-const imageURIPrefix = 'https://image.tmdb.org/t/p/w500/'
-const getPosterURI = movie => `${imageURIPrefix}/${movie.poster_path}`
 
 const styles = StyleSheet.create({
   rowConainer: {
@@ -50,7 +47,7 @@ class MovieCellView extends React.Component {
       <View style={styles.rowConainer}>
         <Image
           style={styles.posterImage}
-          source={{uri: getPosterURI(movie)}}
+          source={{uri: movie.poster_path}}
           resizeMode="contain"
         />
         <View style={styles.textContainer}>
