@@ -5,7 +5,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
-import MovieShape from '../shapes/MovieShape';
+import MovieShape from '../../shapes/MovieShape';
 const imageURIPrefix = 'https://image.tmdb.org/t/p/w500/'
 const getPosterURI = movie => `${imageURIPrefix}/${movie.poster_path}`
 

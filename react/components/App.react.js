@@ -1,5 +1,5 @@
 import React from 'react';
-import MoviewsView from './MoviesView.react';
+import MoviewsView from './movies/MoviesView.react';
 
 class App extends React.Component {
   render() {

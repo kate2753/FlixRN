@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import MovieShape from '../shapes/MovieShape';
+import MovieShape from '../../shapes/MovieShape';
 
 const styles = StyleSheet.create({
   container: {

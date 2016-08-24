@@ -7,8 +7,9 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import MovieShape from '../../shapes/MovieShape';
 import MovieCellView from './MovieCellView.react';
-import { fetchMovies } from '../api/MovieDBClient';
+import { fetchMovies } from '../../api/MovieDBClient';
 
 const styles = StyleSheet.create({
   container: {
@@ -96,6 +97,7 @@ class MoviesView extends React.Component {
 
 MoviesView.propTypes = {
   navigator: PropTypes.object.isRequired,
+  movies: PropTypes.arrayOf(MovieShape),
 };
 
 export default MoviesView;

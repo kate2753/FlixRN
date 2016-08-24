@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import MoviesView from './MoviesView.react';
-import MovieView from './MovieView.react'
+import MoviesView from '../movies/MoviesView.react';
+import MovieView from '../movie_details/MovieView.react'
 
 const styles = StyleSheet.create({
   navBar: {
