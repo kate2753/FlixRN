@@ -7,7 +7,7 @@ import {
   StyleSheet,
   BackAndroid,
 } from 'react-native';
-import MoviesView from '../movies/MoviesView.react';
+import MovieTabs from '../movies/MovieTabs.react';
 import MovieView from '../movie_details/MovieView.react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -87,7 +87,7 @@ class NavApp extends React.Component {
     if (route.id === MOVIES_VIEW_ROUTE.id) {
       return (
         <View style={styles.contentContainer}>
-          <MoviesView navigator={navigator} />
+          <MovieTabs navigator={navigator} />
         </View>
       )
     }

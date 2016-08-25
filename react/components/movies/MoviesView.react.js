@@ -10,8 +10,6 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from 'react-native';
-import { fetchMovies } from '../../api/MovieDBClient';
-import MovieShape from '../../shapes/MovieShape';
 import MovieCellView from './MovieCellView.react';
 import NetworkError from '../shared/NetworkError.react';
 
@@ -69,7 +67,7 @@ class MoviesView extends React.Component {
     );
   }
   getMovies() {
-    fetchMovies()
+    this.props.fetchMovies()
       .then(movies => {
         if (movies) {
           this.setState({
@@ -119,7 +117,6 @@ class MoviesView extends React.Component {
             refreshing={refreshing}
             onRefresh={this.onRefresh}
             tintColor="#DDD"
-            progressBackgroundColor="#ffff00"
           />
         }
       >
@@ -139,7 +136,7 @@ class MoviesView extends React.Component {
 
 MoviesView.propTypes = {
   navigator: PropTypes.object.isRequired,
-  movies: PropTypes.arrayOf(MovieShape),
+  fetchMovies: PropTypes.func.isRequired,
 };
 
 export default MoviesView;
