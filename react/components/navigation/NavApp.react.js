@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import MovieTabs from '../movies/MovieTabs.react';
 import MovieView from '../movie_details/MovieView.react';
+import TrailerView from '../movie_details/TrailerView.react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
@@ -52,6 +53,10 @@ const MOVIES_VIEW_ROUTE = {
   id: 'movies_view',
   title: 'Now Playing',
 };
+const TRAILER_VIDEO_VIEW_ROUTE = {
+  id: 'trailer_video',
+};
+
 const routeMapper = {
   // eslint-disable-next-line react/display-name
   LeftButton: (route, navigator) => {
@@ -94,6 +99,12 @@ class NavApp extends React.Component {
           <MovieTabs navigator={navigator} />
         </View>
       );
+    } else if (route.id === TRAILER_VIDEO_VIEW_ROUTE.id) {
+      return (
+        <View style={styles.contentContainer}>
+          <TrailerView trailerVideo={route.trailerVideo} />
+        </View>
+      )
     }
     return (
       <View style={styles.contentContainer}>
@@ -137,3 +148,7 @@ class NavApp extends React.Component {
 }
 
 export default NavApp;
+export {
+  MOVIES_VIEW_ROUTE,
+  TRAILER_VIDEO_VIEW_ROUTE,
+};

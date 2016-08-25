@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  PropTypes,
+} from 'react';
 import {
   View,
   ScrollView,
@@ -62,7 +64,7 @@ class MovieView extends React.Component {
     }
   }
   render() {
-    const { movie } = this.props;
+    const { movie, navigator } = this.props;
     const { orientation } = this.state;
     return (
       <ScrollView onLayout={this.onLayout}>
@@ -70,6 +72,7 @@ class MovieView extends React.Component {
           <MovieImageWithTrailer
             height={200}
             movie={movie}
+            navigator={navigator}
             resizeMode="cover"
           />
         }
@@ -88,6 +91,7 @@ class MovieView extends React.Component {
               <MovieImageWithTrailer
                 height={150}
                 movie={movie}
+                navigator={navigator}
               />
             }
           </View>
@@ -102,6 +106,7 @@ class MovieView extends React.Component {
 
 MovieView.propTypes = {
   movie: MovieShape.isRequired,
+  navigator: PropTypes.object.isRequired,
 }
 
 export default MovieView;

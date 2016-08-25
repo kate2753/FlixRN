@@ -5,10 +5,12 @@ import {
   StyleSheet,
   Image,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import MovieShape from '../../shapes/MovieShape';
 import { fetchMovieTrailer } from '../../api/MovieDBClient';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { TRAILER_VIDEO_VIEW_ROUTE } from '../navigation/NavApp.react';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,6 +58,7 @@ class MovieImageWithTrailer extends React.Component {
       height,
       resizeMode,
       movie,
+      navigator,
     } = this.props;
     const {
       trailerVideo,
@@ -74,9 +77,18 @@ class MovieImageWithTrailer extends React.Component {
           resizeMode={resizeMode}
         />
         {trailerVideo &&
-          <View style={[overlaySize, styles.overlayStyles]}>
-            <Icon name="play" size={30} color="#FFF" />
-          </View>
+            <View style={[overlaySize, styles.overlayStyles]}>
+              <TouchableOpacity
+                style={[overlaySize,styles.overlayStyles]}
+                onPress={() => navigator.push({
+                  id: TRAILER_VIDEO_VIEW_ROUTE.id,
+                  trailerVideo: trailerVideo,
+                  title: movie.title,
+                })}
+              >
+                <Icon name="play" size={30} color="#FFF" />
+              </TouchableOpacity>
+            </View>
         }
       </View>
     );
@@ -87,6 +99,7 @@ MovieImageWithTrailer.propTypes = {
   height: PropTypes.number.isRequired,
   movie: MovieShape.isRequired,
   resizeMode: PropTypes.string,
+  navigator: PropTypes.object.isRequired,
 }
 
 MovieImageWithTrailer.defaultProps = {
