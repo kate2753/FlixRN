@@ -8,6 +8,7 @@ import {
   View,
   ListView,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import { fetchMovies } from '../../api/MovieDBClient';
 import MovieShape from '../../shapes/MovieShape';
@@ -35,11 +36,15 @@ class MoviesView extends React.Component {
     });
 
     this.state = {
-      dataSource: ds,
+      ds: ds,
+      dataSource: null,
       loading: true,
+      refreshing: false,
       error: null,
     }
 
+    this.onRefresh = this.onRefresh.bind(this);
+    this.getMovies = this.getMovies.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.onRowPress = this.onRowPress.bind(this);
   }
@@ -50,6 +55,12 @@ class MoviesView extends React.Component {
       movie: movie,
     })
   }
+  onRefresh() {
+    this.setState({
+      refreshing: true,
+    });
+    this.getMovies();
+  }
   renderRow(movie) {
     return (
       <TouchableOpacity onPress={() => { this.onRowPress(movie) }}>
@@ -57,13 +68,14 @@ class MoviesView extends React.Component {
       </TouchableOpacity>
     );
   }
-  componentDidMount() {
+  getMovies() {
     fetchMovies()
       .then(movies => {
         if (movies) {
           this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(movies),
+            dataSource: this.state.ds.cloneWithRows(movies),
             loading: false,
+            refreshing: false,
             error: null,
           });
         }
@@ -71,14 +83,20 @@ class MoviesView extends React.Component {
       .catch(error => {
         this.setState({
           loading: false,
+          refreshing: false,
           error: error.message,
         });
       });
   }
+  componentDidMount() {
+    this.getMovies();
+  }
   render() {
     let {
       loading,
+      refreshing,
       error,
+      dataSource,
     } = this.state;
 
     if (loading) {
@@ -94,14 +112,26 @@ class MoviesView extends React.Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={this.onRefresh}
+            tintColor="#DDD"
+            progressBackgroundColor="#ffff00"
+          />
+        }
+      >
         {error &&
           <NetworkError />
         }
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
-        />
+        {dataSource &&
+          <ListView
+            dataSource={dataSource}
+            renderRow={this.renderRow}
+          />
+        }
       </ScrollView>
     );
   }
