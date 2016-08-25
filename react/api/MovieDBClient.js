@@ -16,23 +16,32 @@ function mapMovieResults(movies) {
   });
 }
 
-function fetchMovies(url) {
+function fetchFromAPI(url) {
   return fetch(url)
-    .then(response => response.json())
+    .then(response => response.json());
+}
+
+function fetchMovies(url) {
+  return fetchFromAPI(url)
     .then(response => mapMovieResults(response.results));
 }
 
 function fetchNowPlayingMovies() {
-  console.log('fetching now playing movies');
   return fetchMovies(NOW_PLAYING_URL);
 }
 
 function fetchTopRatedMovies() {
-  console.log('fetching top rated movies');
   return fetchMovies(TOP_RATED_URL);
+}
+
+function fetchMovieTrailer(movie) {
+  const URL = `${URL_PREFIX}/${movie.id}/videos?api_key=${API_KEY}`;
+  return fetchFromAPI(URL)
+    .then( response => response.results.find( video => video.type === 'Trailer'));
 }
 
 export {
   fetchNowPlayingMovies,
   fetchTopRatedMovies,
+  fetchMovieTrailer,
 }

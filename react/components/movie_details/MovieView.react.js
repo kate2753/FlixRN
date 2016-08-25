@@ -4,22 +4,15 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  Image,
 } from 'react-native';
 import MovieShape from '../../shapes/MovieShape';
 import monent from 'moment';
+import MovieImageWithTrailer from './MovieImageWithTrailer.react';
 import MovieRatingStars from '../shared/MovieRatingStars.react';
 
 const ORIENTATION_PORTRAIT = 'portrait';
 const ORIENTATION_LANDSCAPE = 'landscape';
 const styles = StyleSheet.create({
-  posterImage: {
-    height: 200,
-  },
-  posterImageLandscape: {
-    height: 150,
-    flex: 1,
-  },
   movieTitle: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -74,9 +67,9 @@ class MovieView extends React.Component {
     return (
       <ScrollView onLayout={this.onLayout}>
         {orientation === ORIENTATION_PORTRAIT &&
-          <Image
-            style={styles.posterImage}
-            source={{uri: movie.backdrop_path}}
+          <MovieImageWithTrailer
+            height={200}
+            movie={movie}
             resizeMode="cover"
           />
         }
@@ -92,9 +85,9 @@ class MovieView extends React.Component {
               <MovieRatingStars movie={movie} style={styles.ratingView} />
             </View>
             {orientation === ORIENTATION_LANDSCAPE &&
-              <Image
-                style={styles.posterImageLandscape}
-                source={{ uri: movie.backdrop_path }}
+              <MovieImageWithTrailer
+                height={150}
+                movie={movie}
               />
             }
           </View>
