@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 8,
-    fontSize: 12,
+    fontSize: 14,
     color: '#999',
   },
   movieInfo: {
