@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   BackAndroid,
+  StatusBar,
 } from 'react-native';
 import MovieTabs from '../movies/MovieTabs.react';
 import MovieView from '../movie_details/MovieView.react';
@@ -36,12 +37,15 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginLeft: 10,
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#222',
+  },
   contentContainer: {
     flex: 1,
     marginTop: 60,
-    backgroundColor: '#222',
-    overflow: 'visible'
-  }
+    overflow: 'visible',
+  },
 });
 
 const MOVIES_VIEW_ROUTE = {
@@ -89,7 +93,7 @@ class NavApp extends React.Component {
         <View style={styles.contentContainer}>
           <MovieTabs navigator={navigator} />
         </View>
-      )
+      );
     }
     return (
       <View style={styles.contentContainer}>
@@ -115,16 +119,19 @@ class NavApp extends React.Component {
   }
   render() {
     return (
-      <Navigator
-        initialRoute={MOVIES_VIEW_ROUTE}
-        renderScene={this.renderScene}
-        navigationBar={
-          <Navigator.NavigationBar
-            routeMapper={routeMapper}
-            style={styles.navBar}
-          />
-        }
+      <View style={styles.container}>
+        <StatusBar barStyle="light-content"/>
+        <Navigator
+          initialRoute={MOVIES_VIEW_ROUTE}
+          renderScene={this.renderScene}
+          navigationBar={
+            <Navigator.NavigationBar
+              routeMapper={routeMapper}
+              style={styles.navBar}
+            />
+          }
       />
+      </View>
     );
   }
 }
