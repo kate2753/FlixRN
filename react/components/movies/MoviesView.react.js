@@ -3,6 +3,8 @@ import React, {
 } from 'react';
 import {
   StyleSheet,
+  ActivityIndicator,
+  View,
   ListView,
   Text,
   TouchableOpacity,
@@ -16,6 +18,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 10,
     overflow: 'visible',
+  },
+  loadingStateContainer: {
+    flex: 1,
+    justifyContent: 'center',
   }
 });
 
@@ -74,9 +80,13 @@ class MoviesView extends React.Component {
 
     if (loading) {
       return (
-        <Text style={styles.container}>
-          Loading ...
-        </Text>
+        <View style={styles.loadingStateContainer}>
+          <ActivityIndicator
+            animating={true}
+            size="large"
+            color="#DDD"
+          />
+        </View>
       );
     }
 
