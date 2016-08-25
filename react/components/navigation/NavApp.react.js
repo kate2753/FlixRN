@@ -8,7 +8,8 @@ import {
   BackAndroid,
 } from 'react-native';
 import MoviesView from '../movies/MoviesView.react';
-import MovieView from '../movie_details/MovieView.react'
+import MovieView from '../movie_details/MovieView.react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   navBar: {
@@ -18,16 +19,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   navBarItem: {
-    justifyContent: 'center',
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
   },
   navBarText: {
     fontWeight: 'bold',
     color: '#DDD',
-    marginLeft: 10,
   },
   navBarTitleText: {
     marginLeft: 0,
+  },
+  navBarIcon: {
+    marginTop: 3,
+    marginRight: 5,
+    marginLeft: 10,
   },
   contentContainer: {
     flex: 1,
@@ -47,7 +54,13 @@ const routeMapper = {
     if (navigator.getCurrentRoutes().length > 1) {
       return (
         <TouchableOpacity onPress={navigator.pop} style={styles.navBarItem}>
-          <Text style={styles.navBarText}>{'<'} Back</Text>
+          <Icon
+            name="chevron-left"
+            size={12}
+            color="#DDD"
+            style={styles.navBarIcon}
+          />
+          <Text style={styles.navBarText}>Back</Text>
         </TouchableOpacity>
       );
     }

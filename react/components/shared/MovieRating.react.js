@@ -57,7 +57,7 @@ class MovieRating extends React.Component {
 }
 
 MovieRating.propTypes = {
-  movie: MovieShape,
+  movie: MovieShape.isRequired,
 };
 
 export default MovieRating;

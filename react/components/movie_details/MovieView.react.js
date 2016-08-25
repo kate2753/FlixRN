@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import MovieShape from '../../shapes/MovieShape';
 import monent from 'moment';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import MovieRatingStars from '../shared/MovieRatingStars.react';
 
 const styles = StyleSheet.create({
   posterImage: {
@@ -26,7 +26,10 @@ const styles = StyleSheet.create({
   },
   movieInfo: {
     margin: 10,
-  }
+  },
+  ratingView: {
+    marginTop: 8,
+  },
 });
 
 class MovieView extends React.Component {
@@ -43,12 +46,10 @@ class MovieView extends React.Component {
           <Text style={styles.movieTitle}>
             {movie.title}
           </Text>
-          <View>
-            <Icon name="star" size={30} color="yellow" />
-          </View>
           <Text style={styles.text}>
             Released {monent(movie.release_date).format('MMM YYYY')}
           </Text>
+          <MovieRatingStars movie={movie} style={styles.ratingView} />
           <Text style={styles.text}>
             {movie.overview}
           </Text>
