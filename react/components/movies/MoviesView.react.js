@@ -4,14 +4,15 @@ import React, {
 import {
   StyleSheet,
   ActivityIndicator,
+  ScrollView,
   View,
   ListView,
-  Text,
   TouchableOpacity,
 } from 'react-native';
+import { fetchMovies } from '../../api/MovieDBClient';
 import MovieShape from '../../shapes/MovieShape';
 import MovieCellView from './MovieCellView.react';
-import { fetchMovies } from '../../api/MovieDBClient';
+import NetworkError from '../shared/NetworkError.react';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +37,7 @@ class MoviesView extends React.Component {
     this.state = {
       dataSource: ds,
       loading: true,
+      error: null,
     }
 
     this.renderRow = this.renderRow.bind(this);
@@ -62,6 +64,7 @@ class MoviesView extends React.Component {
           this.setState({
             dataSource: this.state.dataSource.cloneWithRows(movies),
             loading: false,
+            error: null,
           });
         }
       })
@@ -90,20 +93,16 @@ class MoviesView extends React.Component {
       );
     }
 
-    if (error) {
-      return (
-        <Text style={styles.container}>
-          {error}
-        </Text>
-      );
-    }
-
     return (
-      <ListView
-        style={styles.container}
-        dataSource={this.state.dataSource}
-        renderRow={this.renderRow}
-      />
+      <ScrollView style={styles.container}>
+        {error &&
+          <NetworkError />
+        }
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow}
+        />
+      </ScrollView>
     );
   }
 }
